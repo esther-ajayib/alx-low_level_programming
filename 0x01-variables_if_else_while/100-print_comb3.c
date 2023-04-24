@@ -18,16 +18,16 @@ int main(void)
 			{
 				putchar(num1);
 				putchar(num2);
-				
+
 				if (num1 == '8' && num2 == '9')
 					continue;
-				
+
 				putchar(',');
 				putchar(' ');
 			}
 		}
 	}
 	putchar('\n');
-	
+
 	return (0);
 }
