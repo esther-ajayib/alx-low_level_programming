@@ -9,20 +9,21 @@
  */
 int main(void)
 {
-	int num1 = 1, num2 = 2, i, sum;
-	int count = 0;
+	int i;
+	long int fibonacci[50];
 
-	printf("%d, %d", num1, num2);
+	fibonacci[0] = 1;
+	fibonacci[1] = 2;
+	printf("%ld, %ld, ", fibonacci[0], fibonacci[1]);
 
-	for (i = 0; i < 48; i++)
+	for (i = 2; i < 49; i++) /* Loop to generate and print the next 48 Fibonacci numbers */
 	{
-		sum = num1 + num2;
-		printf(", %d", sum);
-		num1 = num2;
-		num2 = sum;
+		fibonacci[i] = fibonacci[i - 1] + fibonacci[i - 2];
+		printf("%ld, ", fibonacci[i]); /* Print the calculated Fibonacci number followed by comma and space */
 	}
 
-	printf("\n"),
+	fibonacci[49] = fibonacci[48] + fibonacci[47];
+	printf("%ld\n", fibonacci[49]); /* Print the last Fibonacci number followed by a newline */
 
-	return (0);
+	return 0;
 }
