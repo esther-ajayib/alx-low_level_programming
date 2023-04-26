@@ -1,4 +1,25 @@
-#include <stdio.h>
+#include <unistd.h>
+
+void print_int(int n)
+{
+	char buf[20];
+	int i = 0;
+
+	if (n == 0)
+	{
+		write(1, "0", 1);
+		return;
+	}
+
+	while (n > 0)
+	{
+		buf[i++] = '0' + (n % 10);
+		n /= 10;
+	}
+
+	for (i--; i >= 0; i--)
+		write(1, &buf[i], 1);
+}
 
 /**
  * main - Entry point
@@ -25,6 +46,7 @@ int main(void)
 	}
 
 	printf("%ld\n", sum);
+	write(1, "\n", 1);
 
 	return (0);
 }
