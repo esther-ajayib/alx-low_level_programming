@@ -10,22 +10,18 @@
  */
 int main(void)
 {
-	int i;
-	unsigned long int prev1 = 1, prev2 = 2, curr;
+	int i, a = 1, b = 2, c;
 
-	printf("%d, %d, ", prev1, prev2);
+	printf("%d, %d", a, b);
 
 	for (i = 3; i <= 98; i++)
 	{
-		curr = prev1 + prev2;
-		prev1 = prev2;
-		prev2 = curr;
-
-		if (i == 98)
-			printf("%lu\n", curr);
-		else
-			printf("%lu, ", curr);
+		c = a + b;
+		printf(", %d", c);
+		a = b;
+		b = c;
 	}
+	
+	printf("\n");
 
 	return (0);
-}

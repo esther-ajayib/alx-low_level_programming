@@ -1,52 +1,26 @@
-#include <unistd.h>
-
-void print_int(int n)
-{
-	char buf[20];
-	int i = 0;
-
-	if (n == 0)
-	{
-		write(1, "0", 1);
-		return;
-	}
-
-	while (n > 0)
-	{
-		buf[i++] = '0' + (n % 10);
-		n /= 10;
-	}
-
-	for (i--; i >= 0; i--)
-		write(1, &buf[i], 1);
-}
+#include <stdio.h>
 
 /**
- * main - Entry point
+ * main -  finds and prints the sum of the even-valued terms, followed by a new line
  *
- * Description: Finds and prints the sum of even-valued terms in the Fibonacci sequence
- *              whose values do not exceed 4,000,000
- *
- * Return: 0 (Success)
+ * Return: Always 0 (Success)
  */
+
 int main(void)
 {
 	int i;
-	long int prev1 = 1, prev2 = 2, curr;
-	long int sum = 0;
+	long int fibonacci[50], sum = 2;
 
-	while (prev1 <= 4000000)
+	fibonacci[0] = 1;
+	fibonacci[1] = 2;
+
+	for (i = 2; i < 50; i++)
 	{
-		if (prev1 % 2 == 0)
-			sum += prev1;
-		
-		curr = prev1 + prev2;
-		prev1 = prev2;
-		prev2 = curr;
+		fibonacci[i] = fibonacci[i - 1] + fibonacci[i - 2];
+		if ((fibonacci[i] % 2) == 0 && fibonacci[i] < 4000000)
+			sum += fibonacci[i];
 	}
-
 	printf("%ld\n", sum);
-	write(1, "\n", 1);
 
 	return (0);
 }
