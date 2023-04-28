@@ -5,16 +5,14 @@
  * @n: integer to print
  */
 
-void print_number(int n)
+void print_number(unsigned long long int n)
 {
-	if (n < 0) {
-	_putchar('-');
-		n = -n;
+	if (n < 10) {
+		_putchar(n + '0');
+		return;
 	}
 
-	if (n / 10)
-		print_number(n / 10);
-
+	print_number(n / 10);
 	_putchar(n % 10 + '0');
 }
 
@@ -25,7 +23,7 @@ void print_number(int n)
  */
 int main(void)
 {
-	unsigned long int i, num1 = 1, num2 = 2, sum;
+	unsigned long long int i, num1 = 1, num2 = 2, sum;
 
 	print_number(num1);
 	_putchar(',');
@@ -34,7 +32,8 @@ int main(void)
 	print_number(num2);
 	_putchar(',');
 
-	for (i = 0; i < 96; i++) {
+	for (i = 0; i < 96; i++)
+	{
 		sum = num1 + num2;
 		_putchar(' ');
 

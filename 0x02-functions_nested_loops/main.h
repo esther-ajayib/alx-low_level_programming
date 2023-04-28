@@ -15,6 +15,6 @@ int add(int, int);
 void print_to_98(int n);
 void print_times_table(int n);
 void putformat(int n);
-void print_number(int n);
+void print_number(unsigned long long int n);
 
 #endif /* MAIN_H */
