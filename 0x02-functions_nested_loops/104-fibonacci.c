@@ -35,14 +35,14 @@ int main(void)
 	print_number(num2);
 	_putchar(',');
 
-	for (i = 0; i < 96; i++)
+	for (i = 0; i < 98; i++)
 	{
 		sum = num1 + num2;
 		_putchar(' ');
 
 		print_number(sum);
 
-		if (i != 95)
+		if (i != 97)
 			_putchar(',');
 
 		num1 = num2;
