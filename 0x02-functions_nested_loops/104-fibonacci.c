@@ -5,7 +5,7 @@
  * @n: integer to print
  */
 
-void print_number(unsigned long long int n)
+void print_number(int n)
 {
 	if (n < 10) {
 		_putchar(n + '0');
