@@ -7,7 +7,8 @@
 
 void print_number(int n)
 {
-	if (n < 0) {
+	if (n < 0)
+	{
 		_putchar('-');
 	n = -n;
 	}
@@ -25,7 +26,7 @@ void print_number(int n)
  */
 int main(void)
 {
-	unsigned long int i, num1 = 1, num2 = 2, sum;
+	unsigned long long int i, num1 = 1, num2 = 2, sum;
 
 	print_number(num1);
 	_putchar(',');
