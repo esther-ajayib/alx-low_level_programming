@@ -2,35 +2,64 @@
 #include <stdlib.h>
 #include <time.h>
 
+#define PASSWORD_LENGTH 61
+
 /**
- * main - Entry point
+ * main - Generates a random valid password for 101-crackme program
  *
- * Return: Always 0
+ * Return: 0 on success
  */
 int main(void)
 {
-	int i, sum, diff, c;
-	char password[84];
+	char password[PASSWORD_LENGTH + 1];
+	int i, sum, diff, rand_num;
 
 	srand(time(NULL));
 
-	for (i = 0, sum = 0; sum < 2772 - 122; i++)
+	for (i = 0; i < 9; i++)
 	{
-		c = rand() % 62;
-		if (c < 10)
-			password[i] = '0' + c;
-		else if (c < 36)
-			password[i] = 'a' + c - 10;
-		else
-			password[i] = 'A' + c - 36;
-		sum += password[i];
+		password[i] = rand() % 26 + 'A';
 	}
 
-	diff = 2772 - sum;
-	password[i] = diff % 10 + '0';
-	password[i + 1] = '\0';
+	for (; i < 18; i++)
+	{
+		password[i] = rand() % 26 + 'a';
+	}
 
-	printf("%s\n", password);
+	for (; i < 23; i++)
+	{
+	    password[i] = rand() % 10 + '0';
+	}
+
+	password[i++] = '!';
+	password[i++] = '@';
+	password[i++] = '#';
+	password[i++] = '$';
+	password[i++] = '%';
+	password[i++] = '^';
+
+	sum = 0;
+	for (; i < PASSWORD_LENGTH; i++)
+	{
+		rand_num = rand() % 3;
+		diff = rand() % (sum + 3) + 1;
+		sum += diff;
+		if (rand_num == 0)
+		{
+			password[i] = diff + '0';
+		}
+		else if (rand_num == 1)
+		{
+			password[i] = diff + 'A';
+		}
+		else
+		{
+			password[i] = diff + 'a';
+		}
+	}
+
+	password[PASSWORD_LENGTH] = '\0';
+	printf("%s", password);
+
 	return (0);
 }
-

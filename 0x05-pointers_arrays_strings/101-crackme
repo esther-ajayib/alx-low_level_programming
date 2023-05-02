@@ -1,3 +1,10 @@
 #!/bin/bash
 
-echo "Tada! Congrats"
+password=$(./101-keygen)
+./101-crackme "$password"
+
+if [ $? -eq 0 ]; then
+	echo "Tada! Congrats"
+else
+	echo "Incorrect password"
+fi
