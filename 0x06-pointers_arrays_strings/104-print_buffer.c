@@ -28,7 +28,8 @@ void print_buffer(char *b, int size)
 			if (j < size)
 			{
 				printf("%02x", b[j]);
-			} else
+			}
+			else
 			{
 				printf("  ");
 			}
@@ -58,4 +59,3 @@ void print_buffer(char *b, int size)
 		printf("\n");
 	}
 }
-
