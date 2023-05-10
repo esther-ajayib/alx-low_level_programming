@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * wildcmp_recursive - function to compare two strings with wildcard pattern recursively.
+ * wildcmp_recursive - comparing two strings with wildcard pattern recursively.
  * @s1: The first string.
  * @s2: The second string.
  *
