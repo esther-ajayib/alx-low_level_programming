@@ -15,7 +15,7 @@ int get_string_length(char *s)
 }
 
 /**
- * is_palindrome_recursive - Helper function to check if a string is a palindrome recursively.
+ * is_palindrome_recursive - function to check if a string is a palindrome recursively.
  * @s: The string.
  * @start: The starting index.
  * @end: The ending index.
