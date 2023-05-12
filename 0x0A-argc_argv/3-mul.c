@@ -5,7 +5,6 @@
  * main - Entry point
  * @argc: Argument count
  * @argv: Argument vector
- *
  * Return: 0 if successful, 1 if error
  */
 int main(int argc, char *argv[])
@@ -17,11 +16,13 @@ int main(int argc, char *argv[])
 		printf("Error\n");
 		return (1);
 	}
+	else
+	{
+		num1 = atoi(argv[1]);
+		num2 = atoi(argv[2]);
+		result = num1 * num2;
 
-	num1 = atoi(argv[1]);
-	num2 = atoi(argv[2]);
-	result = num1 * num2;
-
-	printf("%d\n", result);
-	return (0);
+		printf("%d\n", result);
+		return (0);
+	}
 }
