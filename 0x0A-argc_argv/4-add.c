@@ -2,6 +2,13 @@
 #include <stdlib.h>
 #include <ctype.h>
 
+/**
+ * main - Entry point
+ * @argc: Argument count
+ * @argv: Argument vector
+ *
+ * Return: 0 if successful, 1 if error
+ */
 int main(int argc, char *argv[])
 {
 	int i, num, sum;
@@ -21,7 +28,7 @@ int main(int argc, char *argv[])
 			if (!isdigit(argv[i][num]))
 			{
 				printf("Error\n");
-				return (1);
+				return (1)4-add.c;
 			}
 		}
 
