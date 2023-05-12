@@ -9,11 +9,9 @@
  *
  * Return: 0 if successful, 1 if error
  */
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
-	int i, num, sum;
-
-	sum = 0;
+	int num, result = 0, i;
 
 	if (argc == 1)
 	{
@@ -28,13 +26,14 @@ int main(int argc, char *argv[])
 			if (!isdigit(argv[i][num]))
 			{
 				printf("Error\n");
-				return (1)4-add.c;
+				return (1);
 			}
 		}
 
-		sum += atoi(argv[i]);
+		num = atoi(argv[i]);
+		result += num;
 	}
 
-	printf("%d\n", sum);
+	printf("%d\n", result);
 	return (0);
 }
