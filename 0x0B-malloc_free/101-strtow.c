@@ -1,17 +1,14 @@
 #include "main.h"
 #include <stdlib.h>
-
 /**
  * strtow - Splits a string into words
  * @str: The input string
- * Return: Pointer to an array of strings (words),
- *         or NULL if str is NULL or if memory allocation fails
+ * Return: Pointer to (words), or NULL if str is NULL
  */
 char **strtow(char *str)
 {
 	char **words;
 	int i, j, k, len = 0, word_count = 0;
-
 	if (str == NULL || *str == '\0')
 		return (NULL);
 	for (i = 0; str[i] != '\0'; i++)
