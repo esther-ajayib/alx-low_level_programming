@@ -20,7 +20,6 @@ char **strtow(char *str)
 	}
 	if (word_count == 0)
 		return (NULL);
-
 	words = malloc((word_count + 1) * sizeof(char *));
 	if (words == NULL)
 		return (NULL);
@@ -46,5 +45,6 @@ char **strtow(char *str)
 			words[k][j] = '\0', k++;
 		}
 	}
-	words[k] = NULL; return (words);
+	words[k] = NULL;
+	return (words);
 }
