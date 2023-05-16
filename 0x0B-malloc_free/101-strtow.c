@@ -9,6 +9,7 @@ char **strtow(char *str)
 {
 	char **words;
 	int i, j, k, len = 0, word_count = 0;
+	
 	if (str == NULL || *str == '\0')
 		return (NULL);
 	for (i = 0; str[i] != '\0'; i++)
@@ -28,8 +29,7 @@ char **strtow(char *str)
 	{
 		if (str[i] != ' ' && str[i] != '\t')
 		{
-			len = 0;
-			j = i;
+			len = 0, j = i;
 			while ((str[j] != ' ' && str[j] != '\t') && str[j] != '\0')
 			{
 				len++, j++;
@@ -44,8 +44,7 @@ char **strtow(char *str)
 			}
 			for (j = 0; j < len; j++, i++)
 				words[k][j] = str[i];
-			words[k][j] = '\0';
-			k++;
+			words[k][j] = '\0', k++;
 		}
 	}
 	words[k] = NULL;
