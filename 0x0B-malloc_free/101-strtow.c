@@ -10,23 +10,66 @@
  */
 int count_words(char *str)
 {
-	int count = 0, i = 0;
+	int count = 0, i = 0, in_word = 0;
 
 	while (str[i] != '\0')
 	{
 		if (str[i] != ' ')
 		{
-			count++;
-			while (str[i] != ' ' && str[i] != '\0')
-				i++;
+			in_word = 0;
 		}
-		else
+		else if (in_word == 0)
 		{
-			i++;
+			in_word = 1;
+			count++;
 		}
+			i++;
 	}
 
 	return (count);
+}
+
+/**
+ * allocate_words - Allocates memory for words array.
+ * @str: The input string.
+ * @word_count: The number of words in the string.
+ *
+ * Return: Pointer to the allocated words array.
+ */
+char **allocate_words(int word_count)
+{
+	char **words;
+
+	words = malloc((word_count + 1) * sizeof(char *));
+	if (words == NULL)
+		return (NULL);
+
+	return (words);
+}
+
+/**
+ * extract_word - Extracts a word from the input string.
+ * @str: The input string.
+ * @start: The starting index of the word in the string.
+ * @end: The ending index of the word in the string.
+ *
+ * Return: The extracted word.
+ */
+char *extract_word(char *str, int start, int end)
+{
+	int i;
+	int len = end - start;
+	char *word;
+
+	word = malloc((len + 1) * sizeof(char));
+	if (word == NULL)
+		return (NULL);
+
+	for (i = 0; i < len; i++)
+		word[i] = str[start++];
+	word[i] = '\0';
+
+	return (word);
 }
 
 /**
@@ -48,7 +91,7 @@ char **strtow(char *str)
 	if (word_count == 0)
 		return (NULL);
 
-	words = malloc((word_count + 1) * sizeof(char *));
+	words = allocate_words(word_count);
 	if (words == NULL)
 		return (NULL);
 
@@ -66,7 +109,7 @@ char **strtow(char *str)
 				k++;
 			}
 
-			words[j] = malloc((len + 1) * sizeof(char));
+			words[j] = extract_word(str, i, k);
 			if (words[j] == NULL)
 			{
 				for (k = 0; k < j; k++)
@@ -75,9 +118,7 @@ char **strtow(char *str)
 				return (NULL);
 			}
 
-			for (k = 0; k < len; k++)
-				words[j][k] = str[i++];
-			words[j][k] = '\0';
+			i = k;
 			j++;
 		}
 		else
