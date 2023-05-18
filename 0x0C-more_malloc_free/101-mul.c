@@ -18,7 +18,7 @@ int multiply(char *num1, char *num2)
 		len1++;
 	while (num2[len2] != '\0')
 		len2++;
-	
+
 	res_size = len1 + len2;
 	result = malloc(res_size * sizeof(int));
 	if (result == NULL)
@@ -26,7 +26,7 @@ int multiply(char *num1, char *num2)
 
 	for (i = 0; i < res_size; i++)
 		result[i] = 0;
-	
+
 	for (i = len1 - 1; i >= 0; i--)
 	{
 		carry = 0;
@@ -40,17 +40,17 @@ int multiply(char *num1, char *num2)
 		}
 		result[i] += carry;
 	}
-	
+
 	i = 0;
 	while (i < res_size - 1 && result[i] == 0)
 		i++;
-	
+
 	for (; i < res_size; i++)
 		_putchar(result[i] + '0');
 	_putchar('\n');
-	
+
 	free(result);
-	
+
 	return (0);
 }
 
