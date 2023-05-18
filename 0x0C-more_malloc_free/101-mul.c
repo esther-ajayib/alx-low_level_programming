@@ -1,14 +1,15 @@
-#include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>
+#include "main.h"
 
 /**
- * main - Entry point
- * @argc: Number of command-line arguments
- * @argv: Array of command-line arguments
- * Return: 0 on success, 98 on error
+ * multiply - Multiplies two positive numbers
+ * @num1: First number
+ * @num2: Second number
+ *
+ * Return: 0 on success
  */
-int multiply(char *num1, char *num2) {
+int multiply(char *num1, char *num2)
+{
 	int len1 = 0, len2 = 0, i, j, carry;
 	int *result;
 	int res_size;
@@ -17,13 +18,20 @@ int multiply(char *num1, char *num2) {
 		len1++;
 	while (num2[len2] != '\0')
 		len2++;
-
+	
 	res_size = len1 + len2;
-	result = calloc(res_size, sizeof(int));
+	result = malloc(res_size * sizeof(int));
+	if (result == NULL)
+		return (-1);
 
-	for (i = len1 - 1; i >= 0; i--) {
+	for (i = 0; i < res_size; i++)
+		result[i] = 0;
+	
+	for (i = len1 - 1; i >= 0; i--)
+	{
 		carry = 0;
-		for (j = len2 - 1; j >= 0; j--) {
+		for (j = len2 - 1; j >= 0; j--)
+		{
 			int digit1 = num1[i] - '0';
 			int digit2 = num2[j] - '0';
 			int sum = digit1 * digit2 + result[i + j + 1] + carry;
@@ -32,47 +40,38 @@ int multiply(char *num1, char *num2) {
 		}
 		result[i] += carry;
 	}
-
+	
 	i = 0;
 	while (i < res_size - 1 && result[i] == 0)
 		i++;
-
+	
 	for (; i < res_size; i++)
-		printf("%d", result[i]);
-	printf("\n");
-
+		_putchar(result[i] + '0');
+	_putchar('\n');
+	
 	free(result);
-
+	
 	return (0);
 }
 
-int main(int argc, char *argv[]) {
-	int i;
-
+int main(int argc, char *argv[])
+{
 	char *num1;
 	char *num2;
 
-	if (argc != 3) {
-		printf("Error\n");
+	if (argc != 3)
+	{
+		_putchar('E');
+		_putchar('r');
+		_putchar('r');
+		_putchar('o');
+		_putchar('r');
+		_putchar('\n');
 		return (98);
 	}
 
 	num1 = argv[1];
 	num2 = argv[2];
-
-	for (i = 0; num1[i] != '\0'; i++) {
-		if (!isdigit((unsigned char)num1[i])) {
-			printf("Error\n");
-			return (98);
-		}
-	}
-
-	for (i = 0; num2[i] != '\0'; i++) {
-		if (!isdigit((unsigned char)num2[i])) {
-			printf("Error\n");
-			return (98);
-		}
-	}
 
 	multiply(num1, num2);
 
