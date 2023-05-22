@@ -11,7 +11,6 @@
  *
  *Description: This function initializes the fields of a struct dog.
  */
-
 void init_dog(struct dog *d, char *name, float age, char *owner)
 {
 	if (d == NULL)
