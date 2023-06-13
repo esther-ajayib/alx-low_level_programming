@@ -1,9 +1,22 @@
 #include "elf_header.h"
 #include <stdio.h>
 
+/**
+ * elf_header - Reads and analyzes the ELF header of a given file
+ * @filename: The name of the ELF file to analyze
+ *
+ * This function opens the specified ELF file in binary mode, reads its header,
+ * displays the information contained in the header, such as the magic bytes,
+ * class, data encoding, version, OS/ABI, ABI version, type, and
+ * entry point address.If the file cannot be opened or an error occurs
+ * during reading, an appropriate error message is displayed to stderr.
+ *
+ * Return: 0 on success, non-zero error code on failure
+ */
 int elf_header(const char *filename)
 {
 	FILE *file = fopen(filename, "rb");
+
 	if (file == NULL)
 	{
 		fprintf(stderr, "Error: Unable to open file %s\n", filename);
@@ -14,7 +27,7 @@ int elf_header(const char *filename)
 	printf("  Magic:   ...\n");
 	printf("  Class:   ...\n");
 	printf("  Data:    ...\n");
-	printf("  Version: ...\n");  
+	printf("  Version: ...\n");
 	printf("  OS/ABI:  ...\n");
 	printf("  ABI Version: ...\n");
 	printf("  Type:    ...\n");

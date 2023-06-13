@@ -19,7 +19,7 @@ int copy_file(const char *file_from, const char *file_to);
 int main(int argc, char *argv[])
 {
 	const char *file_from;
-        const char *file_to;
+	const char *file_to;
 	int result;
 
 	if (argc != 3)
@@ -104,7 +104,7 @@ int safe_close(int fd)
 	if (close(fd) == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
-		return -1;
+		return (-1);
 	}
 	return (0);
 }
