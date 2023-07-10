@@ -24,14 +24,14 @@ int elf_header(const char *filename)
 	}
 
 	fputs("ELF Header:\n", stdout);
-	fputs("  Magic:   ...\n", stdout);
-	fputs("  Class:   ...\n", stdout);
-	fputs("  Data:    ...\n", stdout);
-	fputs("  Version: ...\n", stdout);
-	fputs("  OS/ABI:  ...\n", stdout);
-	fputs("  ABI Version: ...\n", stdout);
-	fputs("  Type:    ...\n", stdout);
-	fputs("  Entry point address: ...\n", stdout);
+	fputs("Magic:   ...\n", stdout);
+	fputs("Class:   ...\n", stdout);
+	fputs("Data:    ...\n", stdout);
+	fputs("Version: ...\n", stdout);
+	fputs("OS/ABI:  ...\n", stdout);
+	fputs("ABI Version: ...\n", stdout);
+	fputs("Type:    ...\n", stdout);
+	fputs("Entry point address: ...\n", stdout);
 
 	fclose(file);
 	return (0);
