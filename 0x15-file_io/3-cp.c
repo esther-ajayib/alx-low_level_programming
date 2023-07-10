@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int safe_close(int);
 int copy_file(const char *file_from, const char *file_to);
 
 /**
@@ -32,7 +33,7 @@ int main(int argc, char *argv[])
 
 	result = copy_file(file_from, file_to);
 
-	return (result)
+	return (result);
 }
 
 /**
@@ -69,8 +70,8 @@ int copy_file(const char *file_from, const char *file_to)
 		if (bytes_written == -1)
 		{
 			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file_to);
-			close(from_fd);
-			close(to_fd);
+			safe_close(from_fd);
+			safe_close(to_fd);
 			return (99);
 		}
 	}
@@ -78,22 +79,38 @@ int copy_file(const char *file_from, const char *file_to)
 	if (bytes_read == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_from);
-		close(from_fd);
-		close(to_fd);
+		safe_close(from_fd);
+		safe_close(to_fd);
 		return (-1);
 	}
 
-	if (close(from_fd) == -1)
+	if (safe_close(from_fd) == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", from_fd);
 		return (100);
 	}
 
-	if (close(to_fd) == -1)
+	if (safe_close(to_fd) == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", to_fd);
 		return (100);
 	}
 
+	return (0);
+}
+
+/**
+ * safe_close - Closes a file descriptor
+ * @fd: The file descriptor to close
+ *
+ * Return: 0 on success, otherwise -1
+ */
+int safe_close(int fd)
+{
+	if (close(fd) == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
+		return (-1);
+	}
 	return (0);
 }
