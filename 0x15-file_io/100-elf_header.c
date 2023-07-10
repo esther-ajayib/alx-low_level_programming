@@ -1,10 +1,10 @@
+#include "elf_header.h"
 #include <stdio.h>
+#include <stdint.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <elf.h>
 #include <stdlib.h>
-
-#define BUFFER_SIZE 128
 
 /**
  * print_error - Prints an error message to stderr and exits with status code 98
@@ -16,34 +16,37 @@ void print_error(const char *message)
 	exit(98);
 }
 
+
 /**
  * elf_header - Reads and analyzes the ELF header of a given file
  * @filename: The name of the ELF file to analyze
+ *
+ * This function opens the specified ELF file in binary mode, reads its header,
+ * displays the information contained in the header, such as the magic bytes,
+ * class, data encoding, version, OS/ABI, ABI version, type, and
+ * entry point address. If the file cannot be opened or an error occurs
+ * during reading, an appropriate error message is displayed to stderr.
+ *
+ * Return: 0 on success, non-zero error code on failure
  */
-void elf_header(const char *filename)
-{
-	int fd, nread;
-	Elf64_Ehdr header;
-	char buffer[BUFFER_SIZE];
 
-	/* Open the file in read-only mode */
-	fd = open(filename, O_RDONLY);
+int elf_header(const char *filename)
+{
+	int fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		print_error("Unable to open file");
 
-	/* Read the ELF header */
-	nread = read(fd, &header, sizeof(header));
+	Elf64_Ehdr header;
+	ssize_t nread = read(fd, &header, sizeof(header));
 	if (nread != sizeof(header))
 		print_error("Error reading ELF header");
 
-	/* Check if the file is a valid ELF file */
 	if (header.e_ident[EI_MAG0] != ELFMAG0 ||
 	    header.e_ident[EI_MAG1] != ELFMAG1 ||
 	    header.e_ident[EI_MAG2] != ELFMAG2 ||
 	    header.e_ident[EI_MAG3] != ELFMAG3)
 		print_error("Not an ELF file");
 
-	/* Print the ELF header information */
 	printf("ELF Header:\n");
 	printf("  Magic:   ");
 	for (int i = 0; i < EI_NIDENT; i++)
@@ -93,35 +96,27 @@ void elf_header(const char *filename)
 		break;
 	}
 	printf("  ABI Version:                       %d\n", header.e_ident[EI_ABIVERSION]);
-	printf("  Type:                              ");
-	switch (header.e_type)
-	{
-	case ET_EXEC:
-		printf("EXEC (Executable file)\n");
-		break;
-	case ET_DYN:
-		printf("DYN (Shared object file)\n");
-		break;
-	default:
-		printf("<unknown>\n");
-		break;
-	}
-	printf("  Entry point address:               0x%lx\n", header.e_entry);
+	printf("  Type:                              %d\n", header.e_type);
+	printf("  Entry point address:               0x%lx\n", (unsigned long)header.e_entry);
 
 	close(fd);
+	return (0);
 }
 
 /**
  * main - The entry point for the program to get the header of an ELF file
  * @argc: The number of arguments
  * @argv: The pointer to an array of arguments
+ *
  * Return: 0 on success, 98 on failure
  */
 int main(int argc, char *argv[])
 {
 	if (argc != 2)
-		print_error("Usage: elf_header elf_filename");
+	{
+		fprintf(stderr, "Usage: %s elf_filename\n", argv[0]);
+		return (98);
+	}
 
-	elf_header(argv[1]);
-	return 0;
+	return (elf_header(argv[1]));
 }
